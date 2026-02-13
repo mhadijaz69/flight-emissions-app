@@ -39,8 +39,6 @@ passengers = st.slider("Number of passengers", 1, 350, 150)
 fuel_price_per_liter = 0.92
 st.write(f"💵 Fuel price: ${fuel_price_per_liter:.2f}/L (adjusted automatically)")
 
-)
-
 if st.button("Calculate"):
     # Calculate distance
     distance_km = geodesic(airports[origin], airports[destination]).km
