@@ -35,12 +35,9 @@ aircraft1 = st.selectbox("✈️ Select First Aircraft", list(aircraft_data.keys
 aircraft2 = st.selectbox("✈️ Select Second Aircraft", list(aircraft_data.keys()), key="ac2")
 passengers = st.slider("Number of passengers", 1, 350, 150)
 
-fuel_price_per_liter = st.number_input(
-    "💵 Enter fuel price per liter (USD):",
-    min_value=0.1,
-    max_value=5.0,
-    value=0.8,
-    step=0.1
+# Automatically adjusted aviation fuel price (global average estimate)
+fuel_price_per_liter = 0.92
+st.write(f"💵 Fuel price: ${fuel_price_per_liter:.2f}/L (adjusted automatically)")
 )
 
 if st.button("Calculate"):
