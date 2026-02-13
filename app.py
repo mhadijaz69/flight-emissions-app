@@ -47,13 +47,15 @@ if st.button("Calculate"):
     # Calculate distance
     distance_km = geodesic(airports[origin], airports[destination]).km
     st.write(f"🌍 Flight distance: {distance_km:.1f} km")
+
     # Automatic passenger estimation
-if distance_km < 1500:
-    passengers = 150
-elif distance_km < 4000:
-    passengers = 220
-else:
-    passengers = 300
+    if distance_km < 1500:
+        passengers = 150
+    elif distance_km < 4000:
+        passengers = 220
+    else:
+        passengers = 300
+
 
 
     # Store results for both aircraft
