@@ -38,6 +38,7 @@ passengers = st.slider("Number of passengers", 1, 350, 150)
 # Automatically adjusted aviation fuel price (global average estimate)
 fuel_price_per_liter = 0.92
 st.write(f"💵 Fuel price: ${fuel_price_per_liter:.2f}/L (adjusted automatically)")
+
 )
 
 if st.button("Calculate"):
