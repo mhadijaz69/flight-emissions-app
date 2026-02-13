@@ -9,6 +9,11 @@ airports = {
     "JFK (New York)": (40.6413, -73.7781),
     "DXB (Dubai)": (25.2532, 55.3657),
     "LHE (Lahore)": (31.5216, 74.4036)
+    "IST (Istanbul Airport)": (41.2753, 28.7519),  
+    "YYZ (Toronto Pearson)": (43.6777, -79.6248), 
+    "SYD (Sydney Airport)": (-33.9399, 151.1753), 
+    "SIN (Singapore Changi)": (1.3644, 103.9915),  
+
 }
 
 # Aircraft fuel burn (liters per 100 km per seat) - rough estimates
@@ -42,6 +47,14 @@ if st.button("Calculate"):
     # Calculate distance
     distance_km = geodesic(airports[origin], airports[destination]).km
     st.write(f"🌍 Flight distance: {distance_km:.1f} km")
+    # Automatic passenger estimation
+if distance_km < 1500:
+    passengers = 150
+elif distance_km < 4000:
+    passengers = 220
+else:
+    passengers = 300
+
 
     # Store results for both aircraft
     results = {}
