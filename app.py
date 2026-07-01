@@ -10,8 +10,17 @@ st.title("✈️ Flight Fuel & Emission Calculator")
 # Input form
 origin = st.selectbox("Select origin airport", list(airports.keys()))
 destination = st.selectbox("Select destination airport", list(airports.keys()))
-aircraft1 = st.selectbox("✈️ Select First Aircraft", list(aircraft_data.keys()), key="ac1")
-aircraft2 = st.selectbox("✈️ Select Second Aircraft", list(aircraft_data.keys()), key="ac2")
+aircraft1 = st.selectbox(
+    "✈️ Select First Aircraft",
+    list(aircraft.keys()),
+    key="ac1"
+)
+
+aircraft2 = st.selectbox(
+    "✈️ Select Second Aircraft",
+    list(aircraft.keys()),
+    key="ac2"
+)
 passengers = st.slider("Number of passengers", 1, 350, 150)
 
 # Automatically adjusted aviation fuel price (global average estimate)
@@ -23,22 +32,20 @@ if st.button("Calculate"):
     distance_km = geodesic(airports[origin], airports[destination]).km
     st.write(f"🌍 Flight distance: {distance_km:.1f} km")
 
-    # Automatic passenger estimation
-    if distance_km < 1500:
-        passengers = 150
-    elif distance_km < 4000:
-        passengers = 220
-    else:
-        passengers = 300
-
+    capacity = aircraft[ac]["seats"]
+    st.write(f"👥 Aircraft Capacity: {capacity}")
 
 
     # Store results for both aircraft
     results = {}
 
     for ac in [aircraft1, aircraft2]:
-        burn_rate = aircraft_data[ac]
-        total_fuel = (distance_km / 100) * burn_rate * passengers
+        burn_rate = aircraft[ac]["fuel_burn"]
+        speed = aircraft[ac]["cruise_speed"]
+
+flight_time = distance_km / speed
+
+total_fuel = burn_rate * flight_time
         emissions = total_fuel * 2.5  
         fuel_cost = total_fuel * fuel_price_per_liter
         cost_per_passenger = fuel_cost / passengers
@@ -55,6 +62,14 @@ if st.button("Calculate"):
         st.write(f"💨 CO₂ emissions: {emissions:,.0f} kg")
         st.write(f"💰 Fuel cost: ${fuel_cost:,.2f}")
         st.success(f"Cost per passenger: ${cost_per_passenger:,.2f}")
+
+with st.expander(f"📋 {ac} Specifications"):
+    st.write(f"**Manufacturer:** {aircraft[ac]['manufacturer']}")
+    st.write(f"**Category:** {aircraft[ac]['category']}")
+    st.write(f"**Seats:** {aircraft[ac]['seats']}")
+    st.write(f"**Cruise Speed:** {aircraft[ac]['cruise_speed']} km/h")
+    st.write(f"**Range:** {aircraft[ac]['range']} km")
+    st.write(f"**Engines:** {aircraft[ac]['engines']}")
 
     # 📊 Chart for comparison
     chart_data = pd.DataFrame({
