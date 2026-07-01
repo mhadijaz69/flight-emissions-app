@@ -67,7 +67,7 @@ if st.button("Calculate"):
         # Flight calculations
         flight_time = distance_km / speed
         total_fuel = burn_rate * flight_time
-        emissions = total_fuel * 2.5
+        emissions = total_fuel * 3.149
         fuel_cost = total_fuel * fuel_price_per_liter
         cost_per_passenger = fuel_cost / passengers
 
