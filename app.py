@@ -5,19 +5,6 @@ from geopy.distance import geodesic
 from aircraft import aircraft
 from airports import airports
 
-# Dictionary of sample airports (lat, lon)
-airports = {
-    "LHR (London Heathrow)": (51.4700, -0.4543),
-    "JFK (New York)": (40.6413, -73.7781),
-    "DXB (Dubai)": (25.2532, 55.3657),
-    "LHE (Lahore)": (31.5216, 74.4036),
-    "IST (Istanbul Airport)": (41.2753, 28.7519),  
-    "YYZ (Toronto Pearson)": (43.6777, -79.6248), 
-    "SYD (Sydney Airport)": (-33.9399, 151.1753), 
-    "SIN (Singapore Changi)": (1.3644, 103.9915),  
-
-}
-
 # Aircraft fuel burn (liters per 100 km per seat) - rough estimates
 aircraft_data = {
     "Boeing 737": 3.1,
