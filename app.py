@@ -5,16 +5,6 @@ from geopy.distance import geodesic
 from aircraft import aircraft
 from airports import airports
 
-# Aircraft fuel burn (liters per 100 km per seat) - rough estimates
-aircraft_data = {
-    "Boeing 737": 3.1,
-    "Airbus A320": 3.3,
-    "Boeing 787": 2.5,
-    "Airbus A350": 2.4,
-    "Boeing 747": 3.1,
-    "Airbus A380": 3.3,
-}
-
 st.title("✈️ Flight Fuel & Emission Calculator")
 
 # Input form
