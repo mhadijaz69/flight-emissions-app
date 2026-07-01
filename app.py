@@ -2,6 +2,8 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 from geopy.distance import geodesic
+from aircraft import aircraft
+from airports import airports
 
 # Dictionary of sample airports (lat, lon)
 airports = {
