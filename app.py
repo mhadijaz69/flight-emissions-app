@@ -4,21 +4,34 @@ import pandas as pd
 from geopy.distance import geodesic
 from aircraft import aircraft
 from airports import airports
+from airlines import airlines
 
 st.title("✈️ Flight Fuel & Emission Calculator")
 
 # Input form
 origin = st.selectbox("Select origin airport", list(airports.keys()))
 destination = st.selectbox("Select destination airport", list(airports.keys()))
+airline1 = st.selectbox(
+    "🏢 Select First Airline",
+    list(airlines.keys()),
+    key="air1"
+)
+
 aircraft1 = st.selectbox(
-    "✈️ Select First Aircraft",
-    list(aircraft.keys()),
+    "✈️ Aircraft",
+    airlines[airline1],
     key="ac1"
 )
 
+airline2 = st.selectbox(
+    "🏢 Select Second Airline",
+    list(airlines.keys()),
+    key="air2"
+)
+
 aircraft2 = st.selectbox(
-    "✈️ Select Second Aircraft",
-    list(aircraft.keys()),
+    "✈️ Aircraft",
+    airlines[airline2],
     key="ac2"
 )
 passengers = st.slider("Number of passengers", 1, 350, 150)
@@ -41,6 +54,14 @@ if st.button("Calculate"):
 
     for ac in [aircraft1, aircraft2]:
         burn_rate = aircraft[ac]["fuel_burn"]
+        max_range = aircraft[ac]["range"]
+
+if distance_km > max_range:
+    st.error(
+        f"❌ {ac} cannot operate this route.\n"
+        f"Maximum range: {max_range:,} km"
+    )
+    continue
         speed = aircraft[ac]["cruise_speed"]
 
 flight_time = distance_km / speed
